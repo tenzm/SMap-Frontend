@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './Map.css';
 import axios from 'axios';
+import MapboxLanguage from '@mapbox/mapbox-gl-language';
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
@@ -22,7 +23,8 @@ const Map = () => {
       zoom: 10.7
     });
 
-    
+    const language = new MapboxLanguage();
+    map.addControl(language);
 
     axios.get(`http://localhost:8000/get_hydroposts_by_rect?x0=45&y0=120&x1=55&y1=140`)
       .then(res => {
