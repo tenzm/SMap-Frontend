@@ -11,15 +11,11 @@ import { DownOutlined } from '@ant-design/icons';
 import { MenuProps } from 'antd';
 import type { DatePickerProps } from 'antd';
 
+let gloabal_props;
+
 const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-  console.log(date.date(), date.month(), date.year());
-  axios.get(`http://localhost:8000/get_hydroposts_history?post_id=`+6023+`&year=`+date.year()+`&month=`+date.month()+1+`&day=`+date.date())
-      .then(res => {
-        alert(res.data())
-    })
-};
-
-
+    gloabal_props.callback(date.date(), date.month()+1, date.year());    
+  };
 
 
 const menu = (
@@ -42,12 +38,15 @@ const { RangePicker } = DatePicker;
 
 const dateFormat = 'YYYY/MM/DD';
 
-const Hud = () => {
+
+const Hud = (props) => {
+    gloabal_props = props;
+    props.callback('16', '01', '2016');    
     return (
         <div>
             <div>
                 <img className='logo' src={'https://mai.ru/press/brand/mai.gif'} style={{width: '70px', left: '20px',}}></img>
-                <img className='logo' src={'http://localhost:3000/logo.png'} style={{left: '80px'}}></img>
+                <img className='logo' src={'http://localhost:3001/logo.png'} style={{left: '80px'}}></img>
             </div>
             <div className="zoom">
                 <span>

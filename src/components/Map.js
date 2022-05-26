@@ -9,9 +9,9 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 mapboxgl.accessToken =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
+let markers = []
 
-
-const Map = () => {
+const Map = (props) => {
   const mapContainerRef = useRef(null);
 
   const [lng, setLng] = useState(5);
@@ -32,38 +32,10 @@ const Map = () => {
     const language = new MapboxLanguage();
     map.addControl(language);
 
+
+    props.callback(map, markers);
+
     
-
-    axios.get(`http://localhost:8000/get_hydroposts_by_rect?x0=50&y0=120&x1=55&y1=140`)
-      .then(res => {
-        const data = res.data;
-        data_pos=data;
-        console.log(res.data[0]);
-        for(let i = 0; i < data.length; i++){
-          let color = "";
-          let html = "";
-          switch (res.data[i]['post_type']){
-            case 0:
-              color = "#3083ff";
-              html = `<h3><b>Номер гидропоста:</b> `+data[i]['post_id']+`</h3><p><b>Река:</b> `+data[i]['river']+`</p><p><b>Регион:</b> `+data[i]['region']+`</p></p>`
-              break;
-            case 1:
-              color = "#E80000";
-              html = `<h3><b>Номер метеопоста:</b> `+data[i]['post_id']+`</h3><p><b>Регион:</b> `+data[i]['river']+`</p></p>`
-              break;
-  
-          }
-          const marker1 = new mapboxgl.Marker({ "color": color, "scale": 0.7 })
-          .setLngLat([data[i]['longitude'], data[i]['latitude']])
-          .setPopup(
-            new mapboxgl.Popup({ offset: 10 }) // add popups
-            .setHTML(
-            html
-            ))
-          .addTo(map);
-
-        }
-      })
 
       const coordinatesGeocoder = function (query) {
 
