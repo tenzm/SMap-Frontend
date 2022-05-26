@@ -1,16 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './Hud.css';
 import { DatePicker, Space } from 'antd';
+import axios from 'axios';
 
-
-import { Menu, Dropdown, message } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { MenuProps } from 'antd';
-
-import { DatePickerProps } from 'antd';
 
 import moment from 'moment';
 import 'antd/dist/antd.css';
+import { Menu, Dropdown, message } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { MenuProps } from 'antd';
+import type { DatePickerProps } from 'antd';
+
+const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+  console.log(date.date(), date.month(), date.year());
+  axios.get(`http://localhost:8000/get_hydroposts_history?post_id=`+6023+`&year=`+date.year()+`&month=`+date.month()+1+`&day=`+date.date())
+      .then(res => {
+        alert(res.data())
+    })
+};
+
+
 
 
 const menu = (
@@ -50,7 +59,7 @@ const Hud = () => {
             </div>
             <div className="calendar-bar">
                 <Space direction="vertical" size={12}>
-                    <DatePicker defaultValue={moment('2015/01/01', dateFormat)} format={dateFormat} />
+                    <DatePicker defaultValue={moment('2016/01/16', dateFormat)} onChange={onChange} format={dateFormat} />
 
                 </Space>
             </div>
