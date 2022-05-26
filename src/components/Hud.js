@@ -47,7 +47,7 @@ const Hud = () => {
         <div>
             <div>
                 <img className='logo' src={'https://mai.ru/press/brand/mai.gif'} style={{width: '70px', left: '20px',}}></img>
-                <img className='logo' src={'https://upload.wikimedia.org/wikipedia/commons/2/27/Logo_Sberbank.svg'} style={{height: '30px', left:'100px', top: "35px"}}></img>
+                <img className='logo' src={'http://localhost:3000/logo.png'} style={{left: '80px'}}></img>
             </div>
             <div className="zoom">
                 <span>

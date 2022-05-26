@@ -64,8 +64,10 @@
     margin-top: 70px !important;
 }
 
-.logo{
+.logo {
     position: absolute;
     left: 20px;
-    top:  20px;
+    top: 20px;
+    width: 100px;
 }
+
