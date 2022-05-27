@@ -39,8 +39,12 @@ const Preview = () => {
               switch (data[i]['post_type']) {
                 case 0:
                   color = "#3083ff";
-                  html = `<h3><b>Номер гидропоста:</b> ` + data[i]['post_id'] + `</h3><p><b>Река:</b> ` + data[i]['river'] + `</p><p><b>Регион:</b> ` + data[i]['region'] + `</p><p><b>Уровень воды:</b> ` + data[i]['value'] + `</p></p>`
-                  if (data[i]['status'] == 404) html = `<h3><b>Номер гидропоста:</b> ` + data[i]['post_id'] + `</h3><p><b>Река:</b> ` + data[i]['river'] + `</p><p><b>Регион:</b> ` + data[i]['region'] + `</p></p>`
+                  html = `<h3><b>Номер гидропоста:</b> ` + data[i]['post_id'] + `</h3><p><b>Река:</b> ` + data[i]['river'] + `</p><p><b>Регион:</b> ` + data[i]['region'] + `</p><p><b>Уровень воды:</b> ` + data[i]['value'] + `</p><p><a href="/graphic/${data[i]['post_id']}" class="history-btn">История</a></p></p>`
+                  if (data[i]['status'] == 404){ 
+                      html = `<h3><b>Номер гидропоста:</b> ` + data[i]['post_id'] + `</h3><p><b>Река:</b> ` + data[i]['river'] + `</p><p><b>Регион:</b> ` + data[i]['region'] + `</p></p>`;
+                      
+                  color = "#a5a5a5";
+                    }
     
                   break;
                 case 1:

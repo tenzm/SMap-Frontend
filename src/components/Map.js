@@ -77,14 +77,14 @@ const Map = (props) => {
          
         // Add the control to the map.
         map.addControl(
-        new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        localGeocoder: coordinatesGeocoder,
-        zoom: 10,
-        placeholder: 'Post_id:',
-        mapboxgl: mapboxgl,
-        reverseGeocode: true
-        })
+          new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            localGeocoder: coordinatesGeocoder,
+            zoom: 10,
+            placeholder: 'Post_id:',
+            mapboxgl: mapboxgl,
+            reverseGeocode: true
+          })
         );
 
     // Clean up on unmount
