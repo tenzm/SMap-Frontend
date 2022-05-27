@@ -15,12 +15,15 @@ let map_current;
 mapboxgl.accessToken =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
-let markers = []
 
 const Preview = () => {
+  let data_pos = [];
+
     const get_markers = (map, markers) => {
         markers_array = markers;
         map_current = map;
+        console.log('bata', data_pos);
+        return data_pos;
       }
     
       const update_history = (day, month, year) => {
@@ -28,9 +31,9 @@ const Preview = () => {
           markers_array[i].remove();
         }
         axios.get(`http://localhost:8000/get_hydroposts_by_date_and_rect?x0=50&y0=120&x1=55&y1=140&year=${year}&month=${month}&day=${day}`)
-          .then(res => {
-            console.log(res.data);
-    
+          .then(res => {    
+            data_pos = res.data;
+            console.log('data', data_pos);
             const data = res.data;
             console.log(res.data[0]);
             for (let i = 0; i < data.length; i++) {

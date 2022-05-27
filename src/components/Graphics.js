@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Graphics.css';
-import 'antd/dist/antd.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {
@@ -15,14 +14,10 @@ import {
 } from 'chart.js';
 
 import { Line } from 'react-chartjs-2';
-import { DatePicker, Space } from 'antd';
-import { Typography } from 'antd';
-import { Input } from 'antd';
-import { Button } from 'antd';
-import { InputNumber } from 'antd';
+import { DatePicker, Space, Typography, Button, InputNumber } from 'antd';
 const { RangePicker } = DatePicker;
 
-const { Paragraph, Text, Link } = Typography;
+const { Paragraph, Text } = Typography;
 
 ChartJS.register(
   CategoryScale,
@@ -33,15 +28,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-const onChange = (value, dateString) => {
-  console.log('Selected Time: ', value);
-  console.log('Formatted Selected Time: ', dateString);
-};
-
-const onOk = (value) => {
-  console.log('onOk: ', value);
-};
 
 const Graphics = () => {
 

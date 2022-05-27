@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './Map.css';
-import axios from 'axios';
 import MapboxLanguage from '@mapbox/mapbox-gl-language';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -15,10 +14,6 @@ let markers = []
 const Map = (props) => {
   const mapContainerRef = useRef(null);
 
-  const [lng, setLng] = useState(5);
-  const [lat, setLat] = useState(34);
-  const [zoom, setZoom] = useState(1.5);
-
   let data_pos = [];
   let map;
 
@@ -27,54 +22,58 @@ const Map = (props) => {
     map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [127.59235,50.24513]
+      center: [127.59235,50.24513],
+      zoom: 10
     });
 
     const language = new MapboxLanguage();
     map.addControl(language);
     map.addControl(new mapboxgl.NavigationControl(),"bottom-left");
 
-    props.callback(map, markers);
+    data_pos = props.callback(map, markers);
 
-    
+    const coordinatesGeocoder = function (query) {
 
-      const coordinatesGeocoder = function (query) {
-
-        const matches = query.match(
-        /^[ ]*(?:Lat: )?(-?\d+\.?\d*)/i
-        );
-        if (!matches) {
-        return null;
-        }
-         
-        function coordinateFeature(id) {
-          for (let i=0; i < data_pos.length; i++){
-            if (id === data_pos[i]['post_id']){
-              console.log(data_pos[i]['post_id'])
-              return {
-                center: [data_pos[i]['longitude'], data_pos[i]['latitude']],
-                geometry: {
-                type: 'Point',
-                coordinates: [data_pos[i]['longitude'], data_pos[i]['latitude']]
-                },
-                place_name: 'Post_id: ' + id ,
-                place_type: ['coordinate'],
-                properties: {},
-                type: 'Feature'
-                };
-            }
-        
-          }
-         
-        }
-         
-        const id1 = Number(matches[1]);
+      const matches = query.match(
+      /^[ ]*(?:Post_id: )?(-?\d+\.?\d*)/i
+      );
+      if (!matches) {
+      return null;
+      }
        
-        const geocodes = [];
-        geocodes.push(coordinateFeature(id1));
-         
-        return geocodes;
-        };
+      function coordinateFeature(id) {
+        console.log(data_pos)
+        props.callback(map, markers)
+        for (let i=0; i < data_pos.length; i++){
+          
+          if (id === data_pos[i]['post_id'] ){
+            console.log(data_pos[i]['river'])
+            return {
+              center: [data_pos[i]['longitude'], data_pos[i]['latitude']],
+              geometry: {
+              type: 'Point',
+              coordinates: [data_pos[i]['longitude'], data_pos[i]['latitude']]
+              },
+              place_name: 'Post_id: ' + id,
+              place_type: ['coordinate'],
+              properties: {},
+              type: 'Feature'
+              };
+          }
+      
+        }
+       
+      }
+       
+      
+
+      const id1 = Number(matches[1]);
+     
+      const geocodes = [];
+      geocodes.push(coordinateFeature(id1));
+       
+      return geocodes;
+      };
          
         // Add the control to the map.
         map.addControl(

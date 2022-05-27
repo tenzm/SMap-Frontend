@@ -1,5 +1,6 @@
+@import '~antd/dist/antd.min.css';
+
 .post_control{
     width: 976px;
-    margin: 0 auto;
-    
+    margin: 0 auto;   
 }
