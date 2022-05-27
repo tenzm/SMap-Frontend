@@ -1,6 +1,8 @@
 import React from 'react';
 import Map from './components/Map';
 import Hud from './components/Hud';
+import Preview from './components/Preview';
+import Graphics from './components/Graphics';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
@@ -62,8 +64,7 @@ function App() {
 
   return (
     <div>
-      <Map callback={get_markers} />
-      <Hud callback={update_history} />
+      <Preview />
     </div>
   );
 }
