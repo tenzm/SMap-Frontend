@@ -46,15 +46,7 @@ const Hud = (props) => {
         <div>
             <div>
                 <img className='logo' src={'https://mai.ru/press/brand/mai.gif'} style={{width: '70px', left: '20px',}}></img>
-                <img className='logo' src={'http://localhost:3001/logo.png'} style={{left: '80px'}}></img>
-            </div>
-            <div className="zoom">
-                <span>
-                    +
-                </span>
-                <span>
-                    -
-                </span>
+                <img className='logo' src={'http://localhost:3000/logo.png'} style={{left: '80px'}}></img>
             </div>
             <div className="calendar-bar">
                 <Space direction="vertical" size={12}>

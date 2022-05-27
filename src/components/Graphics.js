@@ -126,6 +126,9 @@ const Graphics = () => {
 
   return (
     <div>
+      <div className='post_control' style={{textAlign: 'center', padding: '20px'}}>
+        <h2>Пост: {id} - {post_river}</h2>
+      </div>
       <Line options={{
         responsive: true,
         plugins: {
@@ -137,9 +140,9 @@ const Graphics = () => {
             text: 'Chart.js Line Chart',
           },
         },
-      }} data={graph} />;
+      }} data={graph} className='post_control'/>;
+      
       <div className='post_control'>
-        <h2>Пост: {id} - {post_river}</h2>
         <Paragraph>
           <Text strong>Укажите интервал наблюдений: </Text>
           <Space direction="vertical" size={12}>
@@ -159,7 +162,7 @@ const Graphics = () => {
           <Button type="primary" onClick={() => pushInterval()} >Применить</Button>
         </Paragraph>
       </div>
-    </div>
+      </div>
   );
 };
 

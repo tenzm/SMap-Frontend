@@ -5,6 +5,7 @@ import axios from 'axios';
 import MapboxLanguage from '@mapbox/mapbox-gl-language';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { Button } from 'antd';
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
@@ -19,19 +20,19 @@ const Map = (props) => {
   const [zoom, setZoom] = useState(1.5);
 
   let data_pos = [];
+  let map;
 
   // Initialize map when component mounts
   useEffect(() => {
-    const map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [127.59235,50.24513],
-      zoom: 10.7
+      center: [127.59235,50.24513]
     });
 
     const language = new MapboxLanguage();
     map.addControl(language);
-
+    map.addControl(new mapboxgl.NavigationControl(),"bottom-left");
 
     props.callback(map, markers);
 
@@ -91,9 +92,32 @@ const Map = (props) => {
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  let threed = true;
+  let layers = []
+
+  const change_view = () => {
+    if (threed){
+      map.setStyle('mapbox://styles/mr9bit/cl3iwai1s000l14nfihyhpma2');
+      
+      map.addSource('mapbox-dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        'tileSize': 512,
+        'maxzoom': 14
+        });
+         map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+         
+    }
+    else{
+      map.setStyle('mapbox://styles/mapbox/streets-v11');
+    }
+
+    threed = !threed;
+  }
+
   return (
     <div>
-
+      <Button className='view-button' onClick={change_view}>3D</Button>
       <div className='map-container' ref={mapContainerRef} />
     </div>
   );

@@ -8,10 +8,11 @@
     transform: translateY(-50%);
     backdrop-filter: blur(6px);
     border-radius: 15px;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     display: block;
     text-align: center;
 }
+
 .calendar-bar {
     top: 0;
     position: absolute;
@@ -23,18 +24,18 @@
     transform: translate(-50%);
     backdrop-filter: blur(6px);
     border-radius: 15px;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     display: block;
     margin-top: 10px;
     text-align: center;
 }
 
-.zoom span{
+.zoom span {
     display: block;
     margin: 10px;
 }
 
-.ant-slider-track{
+.ant-slider-track {
     position: absolute;
     height: 4px;
     background-color: #828282 !important;
@@ -60,7 +61,7 @@
     border: none !important;
 }
 
-.search{
+.search {
     margin-top: 70px !important;
 }
 
