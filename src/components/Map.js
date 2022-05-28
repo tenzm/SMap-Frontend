@@ -43,7 +43,7 @@ const Map = (props) => {
        
       function coordinateFeature(id) {
         console.log(data_pos)
-        props.callback(map, markers)
+        data_pos = props.callback(map, markers)
         for (let i=0; i < data_pos.length; i++){
           
           if (id === data_pos[i]['post_id'] ){
